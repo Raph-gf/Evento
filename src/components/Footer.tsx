@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const routes = [
   {
-    path: "/termes-conditions",
+    path: "/terms-conditions",
     name: "Terms & Conditions",
   },
   {

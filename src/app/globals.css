@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+@theme {
+  --color-accent: oklch(0.8676 0.241 142.87);
+}

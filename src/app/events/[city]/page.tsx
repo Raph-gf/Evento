@@ -1,8 +1,7 @@
 import EventsList from "@/components/events-list";
 import Title from "@/components/title";
-import { EventItem } from "@/lib/types";
 import { Suspense } from "react";
-import loading from "./loading";
+import LoadingCityEvents from "./loading";
 
 type EventPageProps = {
   params: Promise<{ city: string }>;
@@ -19,7 +18,9 @@ export default async function CityEventsPage({ params }: EventPageProps) {
           : `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
       </Title>
 
-      <EventsList city={city} />
+      <Suspense fallback={<LoadingCityEvents />}>
+        <EventsList city={city} />
+      </Suspense>
     </main>
   );
 }

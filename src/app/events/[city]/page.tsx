@@ -1,4 +1,5 @@
-import Title from "@/components/Title";
+import EventsList from "@/components/events-list";
+import Title from "@/components/title";
 import { EventItem } from "@/lib/types";
 
 type EventPageProps = {
@@ -6,12 +7,12 @@ type EventPageProps = {
 };
 
 export default async function CityEventsPage({ params }: EventPageProps) {
+  const { city } = await params;
+
   const response = await fetch(
     `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
   );
   const events: EventItem[] = await response.json();
-
-  const { city } = await params;
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
@@ -20,9 +21,7 @@ export default async function CityEventsPage({ params }: EventPageProps) {
           ? "All Events"
           : `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
       </Title>
-      {events.map(event => (
-        <section key={event.id}>{event.name}</section>
-      ))}
+      <EventsList events={events} />
     </main>
   );
 }

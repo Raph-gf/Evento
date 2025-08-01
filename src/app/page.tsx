@@ -1,5 +1,5 @@
-import SearchForm from "@/components/SearchForm";
-import Title from "@/components/Title";
+import SearchForm from "@/components/searchForm";
+import Title from "@/components/title";
 import Link from "next/link";
 
 export default function Home() {

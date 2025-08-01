@@ -1,3 +1,11 @@
+import SkeletonCard from "@/components/skeleton-card";
+
 export default function loading() {
-  return <div>Loading...</div>;
+  return (
+    <div>
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+    </div>
+  );
 }

@@ -15,7 +15,7 @@ export default async function CityEventsPage({ params }: EventPageProps) {
   const events: EventItem[] = await response.json();
 
   return (
-    <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
+    <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh] ">
       <Title className="mb-28">
         {city === "all"
           ? "All Events"

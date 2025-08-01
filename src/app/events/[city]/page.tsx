@@ -1,3 +1,9 @@
+import Title from "@/components/Title";
+
 export default function CityEventsPage() {
-  return <main>Events page</main>;
+  return (
+    <main>
+      <Title>Events in Austin</Title>
+    </main>
+  );
 }

@@ -16,7 +16,7 @@ export default async function CityEventsPage({ params }: EventPageProps) {
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
-      <Title>
+      <Title className="mb-28">
         {city === "all"
           ? "All Events"
           : `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}

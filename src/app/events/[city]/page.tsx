@@ -6,14 +6,12 @@ type EventPageProps = {
 };
 
 export default async function CityEventsPage({ params }: EventPageProps) {
-  const { city } = await params;
-  console.log(city);
-
   const response = await fetch(
     `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
   );
-  const events = await response.json();
-  console.log(events);
+  const events: EventItem[] = await response.json();
+
+  const { city } = await params;
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
@@ -22,7 +20,7 @@ export default async function CityEventsPage({ params }: EventPageProps) {
           ? "All Events"
           : `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
       </Title>
-      {events.map((event: EventItem) => (
+      {events.map(event => (
         <section key={event.id}>{event.name}</section>
       ))}
     </main>

@@ -1,5 +1,4 @@
 import Title from "@/components/title";
-import { section } from "framer-motion/client";
 import Image from "next/image";
 
 type EventPageProps = {

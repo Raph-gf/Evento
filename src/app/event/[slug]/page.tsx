@@ -5,11 +5,27 @@ type EventPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateMetadata({ params }: EventPageProps) {
+  const { slug } = await params;
+
+  console.log(slug);
+
+  return {
+    title: `${slug} event`,
+    description: "Browse more than 10,000 events worldwide",
+  };
+}
+
 export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params;
 
   const res = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
+    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`,
+    {
+      next: {
+        revalidate: 300,
+      },
+    }
   );
   const event = await res.json();
 

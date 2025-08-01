@@ -10,8 +10,11 @@ type EventPageProps = {
 
 export async function generateMetadata({ params }: EventPageProps) {
   const { city } = await params;
+
+  console.log(city);
+
   return {
-    title: `Event in ${city}`,
+    title: city === "all" ? "All Events " : `Event in ${capitalize(city)}`,
     description: "Browse more than 10,000 events worldwide",
   };
 }

@@ -11,6 +11,7 @@ export default function SearchForm() {
     e.preventDefault();
     if (!searchText) return;
     router.push(`/events/${searchText}`);
+    setSearchText("");
   };
 
   return (

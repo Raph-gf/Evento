@@ -1,18 +1,18 @@
 import Title from "@/components/Title";
+import { EventItem } from "@/lib/types";
 
 type EventPageProps = {
-  params: {
-    city: string;
-  };
+  params: Promise<{ city: string }>;
 };
 
 export default async function CityEventsPage({ params }: EventPageProps) {
-  const city = params.city;
+  const { city } = await params;
+  console.log(city);
 
   const response = await fetch(
-    `https://bytegrad.com/course-assests/projects/evento/api/events?city=${city}`
+    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
   );
-  const events = response.json();
+  const events = await response.json();
   console.log(events);
 
   return (
@@ -22,6 +22,9 @@ export default async function CityEventsPage({ params }: EventPageProps) {
           ? "All Events"
           : `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
       </Title>
+      {events.map((event: EventItem) => (
+        <section key={event.id}>{event.name}</section>
+      ))}
     </main>
   );
 }

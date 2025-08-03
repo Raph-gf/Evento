@@ -5,17 +5,12 @@ import LoadingCityEvents from "./loading";
 import { capitalize } from "@/lib/utils";
 import { Metadata } from "next";
 
-type EventPageMetadataProps = {
-  params: {
-    city: string;
-  };
-};
 type EventPageProps = {
   params: Promise<{ city: string }>;
 };
 
-export function generateMetadata({ params }: EventPageMetadataProps): Metadata {
-  const city = params.city;
+export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
+  const { city } = await params;
 
   return {
     title: city === "all" ? "All Events " : `Event in ${capitalize(city)}`,

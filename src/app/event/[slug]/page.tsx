@@ -1,4 +1,5 @@
 import Title from "@/components/title";
+import { getEvent } from "@/lib/utils";
 import Image from "next/image";
 
 type EventPageProps = {
@@ -8,8 +9,10 @@ type EventPageProps = {
 export async function generateMetadata({ params }: EventPageProps) {
   const { slug } = await params;
 
+  const event = await getEvent(slug);
+
   return {
-    title: `${slug} event`,
+    title: event.name,
     description: "Browse more than 10,000 events worldwide",
   };
 }
@@ -17,15 +20,7 @@ export async function generateMetadata({ params }: EventPageProps) {
 export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params;
 
-  const res = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`,
-    {
-      next: {
-        revalidate: 300,
-      },
-    }
-  );
-  const event = await res.json();
+  const event = await getEvent(slug);
 
   return (
     <main>

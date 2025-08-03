@@ -1,8 +1,13 @@
 import EventCard from "./event-card";
 import { getEvents } from "@/lib/utils";
 
-export default async function EventsList({ city }: { city: string }) {
-  const events = await getEvents(city);
+type EventListProps = {
+  city: string;
+  page: number;
+};
+
+export default async function EventsList({ city, page }: EventListProps) {
+  const events = await getEvents(city, page);
 
   return (
     <section className="flex flex-wrap gap-10 justify-center max-w-[1100px] px-[20px] relative ">

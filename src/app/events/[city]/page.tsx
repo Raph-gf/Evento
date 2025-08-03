@@ -4,9 +4,11 @@ import LoadingCityEvents from "./loading";
 import { capitalize } from "@/lib/utils";
 import { Metadata } from "next";
 import H1Title from "@/components/title";
+import { useSearchParams } from "next/navigation";
 
 type EventPageProps = {
   params: Promise<{ city: string }>;
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
@@ -18,8 +20,9 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
   };
 }
 
-export default async function CityEventsPage({ params }: EventPageProps) {
+export default async function CityEventsPage({ params, searchParams }: EventPageProps) {
   const { city } = await params;
+  const page = searchParams.page || 1;
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh] ">
@@ -28,7 +31,7 @@ export default async function CityEventsPage({ params }: EventPageProps) {
       </H1Title>
 
       <Suspense fallback={<LoadingCityEvents />}>
-        <EventsList city={city} />
+        <EventsList city={city} page={Number(page)} />
       </Suspense>
     </main>
   );

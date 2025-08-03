@@ -11,16 +11,24 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export async function getEvents(city: string) {
+export async function getEvents(city: string, page = 1) {
+  const where = city === "all" ? undefined : { city: capitalize(city) };
+  const pageNumber = Number(page) || 1;
+  const skip = (pageNumber - 1) * 6;
+
   const events = await prisma.eventoEvent.findMany({
-    where: {
-      city: city === "all" ? undefined : capitalize(city),
-    },
+    where,
     orderBy: {
       date: "asc",
     },
+    skip,
+    take: 6,
   });
-  return events;
+
+  const totalCount = await prisma.eventoEvent.count({
+    where,
+  });
+  return { events, totalCount };
 }
 
 export async function getEvent(slug: string) {

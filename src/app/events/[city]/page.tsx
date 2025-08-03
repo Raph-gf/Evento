@@ -7,6 +7,7 @@ import H1Title from "@/components/title";
 
 type EventPageProps = {
   params: Promise<{ city: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
@@ -18,8 +19,10 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
   };
 }
 
-export default async function CityEventsPage({ params }: EventPageProps) {
+export default async function CityEventsPage({ params, searchParams }: EventPageProps) {
   const { city } = await params;
+  const responsePage = await searchParams;
+  const page = Number(responsePage?.page) || 1;
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh] ">
@@ -27,8 +30,8 @@ export default async function CityEventsPage({ params }: EventPageProps) {
         {city === "all" ? "All Events" : `Events in ${capitalize(city)}`}
       </H1Title>
 
-      <Suspense fallback={<LoadingCityEvents />}>
-        <EventsList city={city} />
+      <Suspense key={city + page} fallback={<LoadingCityEvents />}>
+        <EventsList city={city} page={page} />
       </Suspense>
     </main>
   );

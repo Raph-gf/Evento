@@ -1,6 +1,6 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EventItem } from "./types";
+import { EventoEvent } from "@/generated/prisma";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,7 +19,7 @@ export async function getEvents(city: string) {
       },
     }
   );
-  const events: EventItem[] = await response.json();
+  const events: EventoEvent[] = await response.json();
   return events;
 }
 
@@ -32,6 +32,6 @@ export async function getEvent(slug: string) {
       },
     }
   );
-  const event = await res.json();
+  const event: EventoEvent = await res.json();
   return event;
 }

@@ -1,4 +1,4 @@
-import Title from "@/components/title";
+import H1Title from "@/components/title";
 import { getEvent } from "@/lib/utils";
 import Image from "next/image";
 
@@ -51,9 +51,9 @@ export default async function EventPage({ params }: EventPageProps) {
               })}
             </p>
 
-            <Title className="mb-2 mt-1 whitespace-nowrap lg:text-5xl">
+            <H1Title className="mb-2 mt-1 whitespace-nowrap lg:text-5xl">
               {event.name}
-            </Title>
+            </H1Title>
 
             <p className="whitespace-nowrap text-xl text-white/75">
               {" "}

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 type TitleProps = {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 };
 
 export default function H1Title({ children, className }: TitleProps) {

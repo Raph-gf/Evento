@@ -4,6 +4,10 @@
   --color-accent: oklch(0.8676 0.241 142.87);
 }
 
+.state-effects {
+  @apply transition hover:scale-105 active:scale-[1.02];
+}
+
 /* SCROLLBAR STYLING */
 /* Chrome, Edge, and Safari */
 ::-webkit-scrollbar {

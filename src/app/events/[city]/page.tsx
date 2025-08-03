@@ -4,6 +4,7 @@ import LoadingCityEvents from "./loading";
 import { capitalize } from "@/lib/utils";
 import { Metadata } from "next";
 import H1Title from "@/components/title";
+import z from "zod";
 
 type EventPageProps = {
   params: Promise<{ city: string }>;
@@ -18,11 +19,18 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
     description: "Browse more than 10,000 events worldwide",
   };
 }
+const pageNumberSchema = z.coerce.number().int().positive().optional();
 
 export default async function CityEventsPage({ params, searchParams }: EventPageProps) {
   const { city } = await params;
   const responsePage = await searchParams;
   const page = Number(responsePage?.page) || 1;
+
+  const parsedPage = pageNumberSchema.safeParse(page);
+
+  if (!parsedPage.success) {
+    throw new Error("Invalid page number");
+  }
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh] ">
@@ -30,8 +38,8 @@ export default async function CityEventsPage({ params, searchParams }: EventPage
         {city === "all" ? "All Events" : `Events in ${capitalize(city)}`}
       </H1Title>
 
-      <Suspense key={city + page} fallback={<LoadingCityEvents />}>
-        <EventsList city={city} page={page} />
+      <Suspense key={city + parsedPage.data} fallback={<LoadingCityEvents />}>
+        <EventsList city={city} page={parsedPage.data} />
       </Suspense>
     </main>
   );

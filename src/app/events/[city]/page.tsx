@@ -21,7 +21,8 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
 
 export default async function CityEventsPage({ params, searchParams }: EventPageProps) {
   const { city } = await params;
-  const { page } = (await searchParams) || 1;
+  const responsePage = await searchParams;
+  const page = Number(responsePage?.page) || 1;
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh] ">
@@ -30,7 +31,7 @@ export default async function CityEventsPage({ params, searchParams }: EventPage
       </H1Title>
 
       <Suspense fallback={<LoadingCityEvents />}>
-        <EventsList city={city} page={Number(page)} />
+        <EventsList city={city} page={page} />
       </Suspense>
     </main>
   );

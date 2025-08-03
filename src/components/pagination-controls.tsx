@@ -1,4 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
+import next from "next";
 import Link from "next/link";
 
 const btnStyles =
@@ -12,14 +13,21 @@ type PaginationProps = {
 export default function PaginationControls({ nextPath, previousPath }: PaginationProps) {
   return (
     <section className="flex w-full justify-between">
-      <Link href={previousPath} className={btnStyles}>
-        <ArrowLeftIcon />
-        Previous
-      </Link>
-      <Link href={nextPath} className={btnStyles}>
-        Next
-        <ArrowRightIcon />
-      </Link>
+      {previousPath ? (
+        <Link href={previousPath} className={btnStyles}>
+          <ArrowLeftIcon />
+          Previous
+        </Link>
+      ) : (
+        <div />
+      )}
+
+      {nextPath && (
+        <Link href={nextPath} className={btnStyles}>
+          Next
+          <ArrowRightIcon />
+        </Link>
+      )}
     </section>
   );
 }

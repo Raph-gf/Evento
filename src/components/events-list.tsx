@@ -8,10 +8,10 @@ type EventListProps = {
 };
 
 export default async function EventsList({ city, page }: EventListProps) {
-  const events = await getEvents(city, page);
+  const { events, totalCount } = await getEvents(city, page);
 
-  const previousPath = `/events/${city}?page=${page - 1}`;
-  const nextPath = `/events/${city}?page=${page + 1}`;
+  const previousPath = page > 1 ? `/events/${city}?page=${page - 1}` : "";
+  const nextPath = totalCount > 6 * page ? `/events/${city}?page=${page + 1}` : "";
 
   return (
     <section className="flex flex-wrap gap-10 justify-center max-w-[1100px] px-[20px] relative ">

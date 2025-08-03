@@ -25,6 +25,7 @@ export default async function CityEventsPage({ params, searchParams }: EventPage
   const { city } = await params;
   const responsePage = await searchParams;
   const page = Number(responsePage?.page) || 1;
+
   const parsedPage = pageNumberSchema.safeParse(page);
 
   if (!parsedPage.success) {

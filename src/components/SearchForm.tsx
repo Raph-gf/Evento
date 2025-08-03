@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import z from "zod";
 
 export default function SearchForm() {
   const [searchText, setSearchText] = useState("");
@@ -9,13 +10,33 @@ export default function SearchForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!searchText) return;
-    router.push(`/events/${searchText}`);
+
+    const parseSearchTextSchema = z
+      .string()
+      .transform(val => val.toLowerCase()) // Transforme en lowercase d'abord
+      .pipe(z.enum(["austin", "seattle"])); // Puis valide avec les valeurs attendues
+
+    const validSearchText = parseSearchTextSchema.safeParse(searchText);
+
+    if (!validSearchText.success) {
+      // Tu peux afficher l'erreur à l'utilisateur au lieu de throw
+      setSearchText("");
+      alert("Invalid query, you can only search for austin or seattle");
+      return;
+    }
+
+    // validSearchText.data contient la valeur validée et transformée
+    router.push(`/events/${validSearchText.data}`);
     setSearchText("");
   };
 
   return (
-    <form id="searchForm" onSubmit={handleSubmit} className="w-full sm:w-[580px]" action="">
+    <form
+      id="searchForm"
+      onSubmit={handleSubmit}
+      className="w-full sm:w-[580px]"
+      action=""
+    >
       <input
         id="searchForm__input"
         value={searchText}

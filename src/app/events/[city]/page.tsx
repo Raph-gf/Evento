@@ -3,15 +3,19 @@ import Title from "@/components/title";
 import { Suspense } from "react";
 import LoadingCityEvents from "./loading";
 import { capitalize } from "@/lib/utils";
+import { Metadata } from "next";
 
+type EventPageMetadataProps = {
+  params: {
+    city: string;
+  };
+};
 type EventPageProps = {
   params: Promise<{ city: string }>;
 };
 
-export async function generateMetadata({ params }: EventPageProps) {
-  const { city } = await params;
-
-  console.log(city);
+export function generateMetadata({ params }: EventPageMetadataProps): Metadata {
+  const city = params.city;
 
   return {
     title: city === "all" ? "All Events " : `Event in ${capitalize(city)}`,

@@ -5,10 +5,14 @@ type EventPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: EventPageProps) {
-  const { slug } = await params;
+type EventPageMetadataProps = {
+  params: {
+    slug: string;
+  };
+};
 
-  console.log(slug);
+export function generateMetadata({ params }: EventPageMetadataProps) {
+  const slug = params.slug;
 
   return {
     title: `${slug} event`,

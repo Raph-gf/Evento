@@ -19,13 +19,11 @@ export default function SearchForm() {
     const validSearchText = parseSearchTextSchema.safeParse(searchText);
 
     if (!validSearchText.success) {
-      // Tu peux afficher l'erreur à l'utilisateur au lieu de throw
       setSearchText("");
       alert("Invalid query, you can only search for austin or seattle");
       return;
     }
 
-    // validSearchText.data contient la valeur validée et transformée
     router.push(`/events/${validSearchText.data}`);
     setSearchText("");
   };

@@ -8,7 +8,6 @@ type EventPageProps = {
 
 export async function generateMetadata({ params }: EventPageProps) {
   const { slug } = await params;
-
   const event = await getEvent(slug);
 
   return {
@@ -19,7 +18,6 @@ export async function generateMetadata({ params }: EventPageProps) {
 
 export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params;
-
   const event = await getEvent(slug);
 
   return (

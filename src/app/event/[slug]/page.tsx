@@ -5,14 +5,8 @@ type EventPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-type EventPageMetadataProps = {
-  params: {
-    slug: string;
-  };
-};
-
-export function generateMetadata({ params }: EventPageMetadataProps) {
-  const slug = params.slug;
+export async function generateMetadata({ params }: EventPageProps) {
+  const { slug } = await params;
 
   return {
     title: `${slug} event`,

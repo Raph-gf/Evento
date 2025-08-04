@@ -1,4 +1,4 @@
-import SearchForm from "@/components/searchForm";
+import SearchForm from "@/components/search-form";
 import H1Title from "@/components/title";
 
 import Link from "next/link";

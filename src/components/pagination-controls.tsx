@@ -1,5 +1,4 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
-import next from "next";
 import Link from "next/link";
 
 const btnStyles =

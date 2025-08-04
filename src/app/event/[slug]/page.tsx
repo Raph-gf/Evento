@@ -1,5 +1,5 @@
 import H1Title from "@/components/title";
-import { getEvent } from "@/lib/utils";
+import { getEvent } from "@/lib/server-utils";
 import Image from "next/image";
 
 type EventPageProps = {

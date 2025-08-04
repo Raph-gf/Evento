@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Logo from "./logo";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Logo from "./Logo";
 
 const routes = [
   {

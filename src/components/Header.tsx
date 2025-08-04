@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import Logo from "./Logo";
+import Logo from "./logo";
 
 const routes = [
   {

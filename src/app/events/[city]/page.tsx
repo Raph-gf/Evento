@@ -3,8 +3,9 @@ import { Suspense } from "react";
 import LoadingCityEvents from "./loading";
 import { capitalize } from "@/lib/utils";
 import { Metadata } from "next";
-import H1Title from "@/components/title";
+
 import z from "zod";
+import H1Title from "@/components/title";
 
 type EventPageProps = {
   params: Promise<{ city: string }>;
